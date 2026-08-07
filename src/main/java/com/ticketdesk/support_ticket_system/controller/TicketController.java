@@ -1,34 +1,33 @@
-package com.ticketdesk.support.controller;
+package com.ticketdesk.support_ticket_system.controller;
+
+import com.ticketdesk.support_ticket_system.model.Ticket;
+import com.ticketdesk.support_ticket_system.service.TicketService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.ArrayList;     
-import com.ticketdesk.support_ticket_system.model.Ticket;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/api/tickets")
 public class TicketController {
-    private List<Ticket> tickets = new ArrayList<>();
-    @GetMapping()
-    public List<Ticket> getTickets(){
-        return tickets;
+
+    private final TicketService ticketService;
+
+    public TicketController(TicketService ticketService) {
+        this.ticketService = ticketService;
     }
-    @GetMapping("/{id}")
-    public Ticket getTicketById(@PathVariable Long id) {
-        for (Ticket ticket : tickets){
-            if(ticket.getId().equals(id)){
-                return ticket;
-            }
-        }
-        return null;
+
+    @GetMapping
+    public List<Ticket> getTickets() {
+        return ticketService.getTickets();
     }
 
     @PostMapping
     public Ticket createTicket(@RequestBody Ticket ticket) {
-        tickets.add(ticket);
-        return ticket;
+        return ticketService.createTicket(ticket);
+    }
+
+    @GetMapping("/{id}")
+    public Ticket getTicketById(@PathVariable Long id) {
+        return ticketService.getTicketById(id);
     }
 }
