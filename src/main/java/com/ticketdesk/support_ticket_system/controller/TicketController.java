@@ -2,7 +2,7 @@ package com.ticketdesk.support.controller;
 
 import java.util.List;
 import com.ticketdesk.support_ticket_system.model.Ticket;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +36,11 @@ public class TicketController {
             "WiFi not working",
             "Unable to connect to university WiFi",
             "OPEN");
+        return ticket;
+    }
+
+    @PostMapping
+    public Ticket createTicket(@RequestBody Ticket ticket) {
         return ticket;
     }
 }
