@@ -5,13 +5,14 @@ import com.ticketdesk.support_ticket_system.model.Ticket;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 @RequestMapping("/api/tickets")
 public class TicketController {
 
-    @GetMapping
-    public List<Ticket> getTickets() {
+    @GetMapping()
+    public List<Ticket> getTickets(){
         
         Ticket ticket1 = new Ticket(
                 1L,
@@ -27,5 +28,14 @@ public class TicketController {
                 "IN_PROGRESS"
         );
         return List.of(ticket1,ticket2);
+    }
+    @GetMapping("/{id}")
+    public Ticket getTicketById(@PathVariable Long id) {
+        
+        Ticket ticket=new Ticket(id,
+            "WiFi not working",
+            "Unable to connect to university WiFi",
+            "OPEN");
+        return ticket;
     }
 }
