@@ -30,4 +30,12 @@ public class TicketController {
     public Ticket getTicketById(@PathVariable Long id) {
         return ticketService.getTicketById(id);
     }
+    @PutMapping("/{id}")
+    public Ticket updateTicket(
+            @PathVariable Long id,
+            @RequestBody Ticket updatedTicket
+    ) {
+
+        return ticketService.updateTicket(id, updatedTicket);
+    }
 }
