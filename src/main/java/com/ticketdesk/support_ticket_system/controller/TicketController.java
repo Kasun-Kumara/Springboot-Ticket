@@ -30,6 +30,8 @@ public class TicketController {
     public Ticket getTicketById(@PathVariable Long id) {
         return ticketService.getTicketById(id);
     }
+
+
     @PutMapping("/{id}")
     public Ticket updateTicket(
             @PathVariable Long id,
@@ -37,5 +39,11 @@ public class TicketController {
     ) {
 
         return ticketService.updateTicket(id, updatedTicket);
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean deleteTicket(@PathVariable Long id) {
+
+        return ticketService.deleteTicket(id);
     }
 }

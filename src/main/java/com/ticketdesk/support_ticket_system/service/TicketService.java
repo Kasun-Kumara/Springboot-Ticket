@@ -39,6 +39,10 @@ public class TicketService {
             }
         }
 
+        
         return null;
+    }
+    public boolean deleteTicket(Long id) {
+        return tickets.removeIf(ticket -> ticket.getId().equals(id));
     }
 }
