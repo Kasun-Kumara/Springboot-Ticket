@@ -2,6 +2,10 @@ package com.ticketdesk.support_ticket_system.controller;
 
 import com.ticketdesk.support_ticket_system.model.Ticket;
 import com.ticketdesk.support_ticket_system.service.TicketService;
+
+import jakarta.validation.Valid;
+
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +26,9 @@ public class TicketController {
     }
 
     @PostMapping
-    public Ticket createTicket(@RequestBody Ticket ticket) {
+    public Ticket createTicket(
+            @Valid @RequestBody Ticket ticket) {
+
         return ticketService.createTicket(ticket);
     }
 
@@ -35,7 +41,7 @@ public class TicketController {
     @PutMapping("/{id}")
     public Ticket updateTicket(
             @PathVariable Long id,
-            @RequestBody Ticket updatedTicket
+            @Valid @RequestBody Ticket updatedTicket
     ) {
 
         return ticketService.updateTicket(id, updatedTicket);
