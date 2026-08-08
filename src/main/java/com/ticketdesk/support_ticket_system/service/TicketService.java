@@ -1,5 +1,6 @@
 package com.ticketdesk.support_ticket_system.service;
 
+import com.ticketdesk.support_ticket_system.exception.TicketNotFoundException;
 import com.ticketdesk.support_ticket_system.model.Ticket;
 import org.springframework.stereotype.Service;
 import com.ticketdesk.support_ticket_system.repository.TicketRepository;
@@ -24,16 +25,14 @@ public class TicketService {
     }
 
     public Ticket getTicketById(Long id) {
-        return ticketRepository.findById(id).orElse(null);
+        return ticketRepository.findById(id)
+                .orElseThrow(() -> new TicketNotFoundException(id));
     }
-    
+        
     public Ticket updateTicket(Long id, Ticket updatedTicket) {
 
-        Ticket ticket = ticketRepository.findById(id).orElse(null);
-
-        if (ticket == null) {
-            return null;
-        }
+        Ticket ticket = ticketRepository.findById(id)
+        .orElseThrow(() -> new TicketNotFoundException(id));
 
         ticket.setTitle(updatedTicket.getTitle());
         ticket.setDescription(updatedTicket.getDescription());
@@ -42,14 +41,12 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
     
-    public boolean deleteTicket(Long id) {
+    public void deleteTicket(Long id) {
 
         if (!ticketRepository.existsById(id)) {
-            return false;
+            throw new TicketNotFoundException(id);
         }
 
         ticketRepository.deleteById(id);
-
-        return true;
-}
+    }
 }

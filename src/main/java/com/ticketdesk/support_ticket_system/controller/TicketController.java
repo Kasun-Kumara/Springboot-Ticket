@@ -42,8 +42,7 @@ public class TicketController {
     }
 
     @DeleteMapping("/{id}")
-    public boolean deleteTicket(@PathVariable Long id) {
-
-        return ticketService.deleteTicket(id);
+    public void deleteTicket(@PathVariable Long id) {
+        ticketService.deleteTicket(id);
     }
 }
