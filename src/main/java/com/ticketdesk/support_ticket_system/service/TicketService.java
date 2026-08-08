@@ -1,11 +1,11 @@
 package com.ticketdesk.support_ticket_system.service;
 
-import com.ticketdesk.support_ticket_system.exception.TicketNotFoundException;
-import com.ticketdesk.support_ticket_system.model.Ticket;
-import org.springframework.stereotype.Service;
-import com.ticketdesk.support_ticket_system.repository.TicketRepository;
 import com.ticketdesk.support_ticket_system.dto.TicketRequest;
 import com.ticketdesk.support_ticket_system.dto.TicketResponse;
+import com.ticketdesk.support_ticket_system.exception.TicketNotFoundException;
+import com.ticketdesk.support_ticket_system.model.Ticket;
+import com.ticketdesk.support_ticket_system.repository.TicketRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -33,6 +33,7 @@ public class TicketService {
         ticket.setTitle(request.getTitle());
         ticket.setDescription(request.getDescription());
         ticket.setStatus(request.getStatus());
+        ticket.setPriority(request.getPriority());
 
         Ticket savedTicket = ticketRepository.save(ticket);
 
@@ -54,6 +55,7 @@ public class TicketService {
         ticket.setTitle(request.getTitle());
         ticket.setDescription(request.getDescription());
         ticket.setStatus(request.getStatus());
+        ticket.setPriority(request.getPriority());
 
         Ticket updatedTicket = ticketRepository.save(ticket);
 
@@ -75,7 +77,8 @@ public class TicketService {
                 ticket.getId(),
                 ticket.getTitle(),
                 ticket.getDescription(),
-                ticket.getStatus()
+                ticket.getStatus(),
+                ticket.getPriority()
         );
     }
 }

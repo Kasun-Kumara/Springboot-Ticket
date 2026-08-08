@@ -7,6 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+
+import com.ticketdesk.support_ticket_system.enums.TicketPriority;
 import com.ticketdesk.support_ticket_system.enums.TicketStatus;
 
 @Entity
@@ -27,11 +29,15 @@ public class Ticket {
     @Enumerated(EnumType.STRING)
     private TicketStatus status;
 
-    public Ticket(Long id, String title, String description, TicketStatus status) {
+    @Enumerated(EnumType.STRING)
+    private TicketPriority priority;
+
+    public Ticket(Long id, String title, String description, TicketStatus status, TicketPriority TicketPriority) {
     this.id = id;
     this.title = title;
     this.description = description;
     this.status = status;
+    this.priority = TicketPriority;
     }
     public Long getId() {
     return id;
@@ -48,6 +54,11 @@ public class Ticket {
     public TicketStatus getStatus() {
         return status;
     }
+
+    public TicketPriority getPriority() {
+        return priority;
+    }
+
     public Ticket() {
     }
     public void setId(Long id) {
@@ -64,5 +75,9 @@ public class Ticket {
 
     public void setStatus(TicketStatus status) {
         this.status = status;
+    }
+
+    public void setPriority(TicketPriority priority) {
+        this.priority = priority;
     }
 }

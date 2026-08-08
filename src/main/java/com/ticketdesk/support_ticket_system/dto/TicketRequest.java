@@ -1,5 +1,6 @@
 package com.ticketdesk.support_ticket_system.dto;
 
+import com.ticketdesk.support_ticket_system.enums.TicketPriority;
 import com.ticketdesk.support_ticket_system.enums.TicketStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -19,6 +20,9 @@ public class TicketRequest {
 
     @NotNull(message = "Status is required")
     private TicketStatus status;
+
+    @NotNull(message = "Priority is required")
+    private TicketPriority priority;
 
     public TicketRequest() {
     }
@@ -45,5 +49,13 @@ public class TicketRequest {
 
     public void setStatus(TicketStatus status) {
         this.status = status;
+    }
+
+    public TicketPriority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(TicketPriority priority) {
+        this.priority = priority;
     }
 }
