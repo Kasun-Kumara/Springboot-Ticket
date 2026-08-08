@@ -9,7 +9,7 @@ import com.ticketdesk.support_ticket_system.dto.TicketResponse;
 
 import jakarta.validation.Valid;
 
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class TicketController {
     }
 
     @GetMapping
-    public List<Ticket> getTickets() {
+    public List<TicketResponse> getTickets() {
         return ticketService.getTickets();
     }
 
@@ -37,22 +37,26 @@ public class TicketController {
     }
 
     @GetMapping("/{id}")
-    public Ticket getTicketById(@PathVariable Long id) {
+    public TicketResponse getTicketById(@PathVariable Long id) {
         return ticketService.getTicketById(id);
     }
 
 
     @PutMapping("/{id}")
-    public Ticket updateTicket(
+    public TicketResponse updateTicket(
             @PathVariable Long id,
-            @Valid @RequestBody Ticket updatedTicket
+            @Valid @RequestBody TicketRequest request
     ) {
 
-        return ticketService.updateTicket(id, updatedTicket);
+        return ticketService.updateTicket(id, request);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteTicket(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTicket(
+            @PathVariable Long id) {
+
         ticketService.deleteTicket(id);
+
+        return ResponseEntity.noContent().build();
     }
 }

@@ -18,8 +18,12 @@ public class TicketService {
         this.ticketRepository = ticketRepository;
     }
     
-    public List<Ticket> getTickets() {
-        return ticketRepository.findAll();
+    public List<TicketResponse> getTickets() {
+
+        return ticketRepository.findAll()
+                .stream()
+                .map(this::mapToResponse)
+                .toList();
     }
 
     public TicketResponse createTicket(TicketRequest request) {
@@ -35,21 +39,25 @@ public class TicketService {
         return mapToResponse(savedTicket);
     }
 
-    public Ticket getTicketById(Long id) {
-        return ticketRepository.findById(id)
-                .orElseThrow(() -> new TicketNotFoundException(id));
+    public TicketResponse getTicketById(Long id) {
+         Ticket ticket = ticketRepository.findById(id)
+            .orElseThrow(() -> new TicketNotFoundException(id));
+
+        return mapToResponse(ticket);
     }
         
-    public Ticket updateTicket(Long id, Ticket updatedTicket) {
+    public TicketResponse updateTicket(Long id, TicketRequest request) {
 
         Ticket ticket = ticketRepository.findById(id)
         .orElseThrow(() -> new TicketNotFoundException(id));
 
-        ticket.setTitle(updatedTicket.getTitle());
-        ticket.setDescription(updatedTicket.getDescription());
-        ticket.setStatus(updatedTicket.getStatus());
+        ticket.setTitle(request.getTitle());
+        ticket.setDescription(request.getDescription());
+        ticket.setStatus(request.getStatus());
 
-        return ticketRepository.save(ticket);
+        Ticket updatedTicket = ticketRepository.save(ticket);
+
+        return mapToResponse(updatedTicket);
     }
     
     public void deleteTicket(Long id) {
