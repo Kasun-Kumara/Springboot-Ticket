@@ -4,6 +4,8 @@ import com.ticketdesk.support_ticket_system.exception.TicketNotFoundException;
 import com.ticketdesk.support_ticket_system.model.Ticket;
 import org.springframework.stereotype.Service;
 import com.ticketdesk.support_ticket_system.repository.TicketRepository;
+import com.ticketdesk.support_ticket_system.dto.TicketRequest;
+import com.ticketdesk.support_ticket_system.dto.TicketResponse;
 
 import java.util.List;
 
@@ -20,8 +22,17 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
-    public Ticket createTicket(Ticket ticket) {
-        return ticketRepository.save(ticket);
+    public TicketResponse createTicket(TicketRequest request) {
+
+        Ticket ticket = new Ticket();
+
+        ticket.setTitle(request.getTitle());
+        ticket.setDescription(request.getDescription());
+        ticket.setStatus(request.getStatus());
+
+        Ticket savedTicket = ticketRepository.save(ticket);
+
+        return mapToResponse(savedTicket);
     }
 
     public Ticket getTicketById(Long id) {
@@ -48,5 +59,15 @@ public class TicketService {
         }
 
         ticketRepository.deleteById(id);
+    }
+
+    private TicketResponse mapToResponse(Ticket ticket) {
+
+        return new TicketResponse(
+                ticket.getId(),
+                ticket.getTitle(),
+                ticket.getDescription(),
+                ticket.getStatus()
+        );
     }
 }

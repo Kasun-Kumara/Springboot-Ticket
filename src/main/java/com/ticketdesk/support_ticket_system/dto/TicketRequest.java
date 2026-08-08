@@ -1,0 +1,47 @@
+package com.ticketdesk.support_ticket_system.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
+public class TicketRequest {
+
+    @NotBlank(message = "Title is required")
+    @Size(min = 5, max = 100,
+            message = "Title must be between 5 and 100 characters")
+    private String title;
+
+    @NotBlank(message = "Description is required")
+    @Size(min = 10, max = 500,
+            message = "Description must be between 10 and 500 characters")
+    private String description;
+
+    @NotBlank(message = "Status is required")
+    private String status;
+
+    public TicketRequest() {
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+}

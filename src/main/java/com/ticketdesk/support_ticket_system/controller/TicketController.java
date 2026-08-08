@@ -1,7 +1,11 @@
 package com.ticketdesk.support_ticket_system.controller;
 
+import com.ticketdesk.support_ticket_system.dto.TicketRequest;
+import com.ticketdesk.support_ticket_system.dto.TicketResponse;
 import com.ticketdesk.support_ticket_system.model.Ticket;
 import com.ticketdesk.support_ticket_system.service.TicketService;
+import com.ticketdesk.support_ticket_system.dto.TicketRequest;
+import com.ticketdesk.support_ticket_system.dto.TicketResponse;
 
 import jakarta.validation.Valid;
 
@@ -26,10 +30,10 @@ public class TicketController {
     }
 
     @PostMapping
-    public Ticket createTicket(
-            @Valid @RequestBody Ticket ticket) {
+    public TicketResponse createTicket(
+            @Valid @RequestBody TicketRequest request) {
 
-        return ticketService.createTicket(ticket);
+        return ticketService.createTicket(request);
     }
 
     @GetMapping("/{id}")
