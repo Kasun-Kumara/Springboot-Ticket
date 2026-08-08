@@ -4,8 +4,7 @@ import com.ticketdesk.support_ticket_system.dto.TicketRequest;
 import com.ticketdesk.support_ticket_system.dto.TicketResponse;
 import com.ticketdesk.support_ticket_system.model.Ticket;
 import com.ticketdesk.support_ticket_system.service.TicketService;
-import com.ticketdesk.support_ticket_system.dto.TicketRequest;
-import com.ticketdesk.support_ticket_system.dto.TicketResponse;
+
 
 import jakarta.validation.Valid;
 

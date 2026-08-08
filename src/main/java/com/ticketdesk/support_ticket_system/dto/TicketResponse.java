@@ -1,11 +1,12 @@
 package com.ticketdesk.support_ticket_system.dto;
+import com.ticketdesk.support_ticket_system.enums.TicketStatus;
 
 public class TicketResponse {
 
     private Long id;
     private String title;
     private String description;
-    private String status;
+    private TicketStatus status;
 
     public TicketResponse() {
     }
@@ -14,7 +15,7 @@ public class TicketResponse {
             Long id,
             String title,
             String description,
-            String status) {
+            TicketStatus status) {
 
         this.id = id;
         this.title = title;
@@ -34,7 +35,7 @@ public class TicketResponse {
         return description;
     }
 
-    public String getStatus() {
+    public TicketStatus getStatus() {
         return status;
     }
 }

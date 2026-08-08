@@ -1,6 +1,8 @@
 package com.ticketdesk.support_ticket_system.dto;
 
+import com.ticketdesk.support_ticket_system.enums.TicketStatus;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class TicketRequest {
@@ -15,8 +17,8 @@ public class TicketRequest {
             message = "Description must be between 10 and 500 characters")
     private String description;
 
-    @NotBlank(message = "Status is required")
-    private String status;
+    @NotNull(message = "Status is required")
+    private TicketStatus status;
 
     public TicketRequest() {
     }
@@ -37,11 +39,11 @@ public class TicketRequest {
         this.description = description;
     }
 
-    public String getStatus() {
+    public TicketStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TicketStatus status) {
         this.status = status;
     }
 }

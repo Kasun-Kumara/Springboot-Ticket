@@ -1,10 +1,13 @@
 package com.ticketdesk.support_ticket_system.model;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import com.ticketdesk.support_ticket_system.enums.TicketStatus;
 
 @Entity
 public class Ticket {
@@ -21,9 +24,10 @@ public class Ticket {
     private String description;
 
     @NotBlank(message = "Status is required")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private TicketStatus status;
 
-    public Ticket(Long id, String title, String description, String status) {
+    public Ticket(Long id, String title, String description, TicketStatus status) {
     this.id = id;
     this.title = title;
     this.description = description;
@@ -41,7 +45,7 @@ public class Ticket {
         return description;
     }
 
-    public String getStatus() {
+    public TicketStatus getStatus() {
         return status;
     }
     public Ticket() {
@@ -58,7 +62,7 @@ public class Ticket {
         this.description = description;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(TicketStatus status) {
         this.status = status;
     }
 }
